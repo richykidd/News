@@ -18,6 +18,9 @@
                                 <frame key="frameInset" minY="64" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2sn-iU-Sg6" id="gX7-Lk-4zF"/>
+                                </connections>
                             </scrollView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" id="6PF-W6-ZSF">
                                 <frame key="frameInset" minY="116" width="375" height="552"/>

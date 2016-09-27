@@ -8,25 +8,20 @@
 
 import UIKit
 
+
+
 class NewsViewController: UIViewController {
-    // MARK: - 属性
+    
+    // MARK: - 标题滚动视图
     @IBOutlet weak var titleScrollView: UIScrollView!
-//    @IBOutlet weak var contentScrollView: UIScrollView!
+    //@IBOutlet weak var contentScrollView: UIScrollView!
 
     var titleArray = [String]()
    
     // 全局颜色: 蓝色
     let colorLan = UIColor(hue:0.56, saturation:0.76, brightness:1.00, alpha:1.00)
-    
-//    let screenW = UIScreen.main.bounds.width
-//    let screenH = UIScreen.main.bounds.height
-//    let statusH: CGFloat = 20           // 状态栏的高度
-//    let navigationH: CGFloat = 44       // 导航栏的高度
-//    private let ScrollLineH : CGFloat = 2   // 滚动滑块的高度
 
-    
-    
-    private var currentIndex: Int = 0       // 当前的索引
+    private var currentIndex: Int = 0       // 当前的下标值
     private var oldLabel = UILabel()        // 点击之前的 label
     
     private let NormalColor : (CGFloat, CGFloat, CGFloat) = (85, 85, 85)
@@ -49,28 +44,25 @@ class NewsViewController: UIViewController {
         //childVcs.append(RecommendViewController())
         
         for _ in 0..<13 {
-            
             let vc = UIViewController()
-            
             vc.view.backgroundColor = UIColor(red: CGFloat(arc4random_uniform(255)), green: CGFloat(arc4random_uniform(255)), blue: CGFloat(arc4random_uniform(255)))
+            
             childVcs.append(vc)
         }
         
         let contentView = ContentView(frame: contentFrame, childVCs: childVcs, parentViewController: self!)
-       
-        //contentView.delegate = self
+        
+        
         return contentView
+        
         }()
     
-    
-
-    
-    
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-         titleArray = ["头条", "精选", "娱乐", "手机","体育", "视频", "财经", "汽车","军事", "房产", "健康", "彩票", "搞笑"]
+         titleArray = ["头条", "精选", "娱乐", "手机","体育", "视频", "财经", "汽车","军事", "时尚", "健康", "彩票", "搞笑"]
         
         // iOS7以后, 导航控制器中ScrollView顶部会添加 64 的额外高度
         automaticallyAdjustsScrollViewInsets = false
@@ -80,32 +72,34 @@ class NewsViewController: UIViewController {
         */
         titleScrollView.scrollsToTop = false
 
-        
-        // 设置是否边缘弹动效果
-        // 滑动视图的边界回弹效果，默认为YES.表示开启动画，设置为NO时，当滑动到边缘就是无效果
-        titleScrollView.bounces = false
+        // 设置是否边缘弹动效果, 默认为true.表示开启动画，设置为false时，当滑动到边缘就是无效果
+        titleScrollView.bounces = true
 
+        // 设置导航栏
+        setupNavigationColorAndLogo()
 
         // 设置标题栏的分类
         setUpTitle()
         
-        // 设置导航栏
-        setupNavigationColorAndLogo()
         
         // 设置底线和滚动的滑块
         setupBottomLineAndScrollLine()
         
-        
-        
-        // 添加 contentView
+        // 添加contentView到视图控制器中
         view.addSubview(contentView)
+        
+        
+        
+        
+        
+        
     }
     // MARK: - 设置导航栏
     private func setupNavigationColorAndLogo() {
     
         // 设置导航栏背景色
         navigationController?.navigationBar.barTintColor = colorLan
-        //修改导航栏文字颜色
+        // 修改导航栏文字颜色
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
    
         // 设置导航栏LOGO
@@ -149,16 +143,15 @@ class NewsViewController: UIViewController {
     }
 
     // MARK:- 设置标题栏的分类
-    func setUpTitle() {
+    private func setUpTitle() {
         /*
          * 临时常量\变量
          标题的个数必须和数组的个数相同"
          定义一个常量表示标题按钮的个数, 即就是数组元素的个数
          */
         
-        let scollViewLine: CGFloat = 5
         let labelWidth: CGFloat = 50.0
-        let labelHeight: CGFloat = titleScrollView.frame.size.height - scollViewLine
+        let labelHeight: CGFloat = titleScrollView.frame.height - ScrollLineH
         let labelY: CGFloat = 0
         
         
@@ -200,14 +193,17 @@ class NewsViewController: UIViewController {
        
         }
         
-         // 设置 (标题\内容) 滚动视图 的 滚动范围
+         // 设置 (标题\内容) 滚动视图的滚动范围
         titleScrollView.contentSize = CGSize(width: titleArray.count * Int(labelWidth), height: 0)
-//        contentScrollView.contentSize = CGSize(width: titleArray.count * Int(screenW), height: 0)
+       // contentScrollView.contentSize = CGSize(width: titleArray.count * Int(screenW), height: 0)
+        
+        
         
     }
     
+
     //MARK:- 监听顶部 label手势点击事件
-    func labelClick(tap: UITapGestureRecognizer) {
+    @objc private func labelClick(tap: UITapGestureRecognizer) {
         
         print(tap.view)
         
@@ -215,6 +211,7 @@ class NewsViewController: UIViewController {
         // 本质: 修改 titleScollview 的偏移量
         // 偏移量 = label 的中心 X 减去屏幕宽度的一半
         
+        // 获取当前 label
         let index = tap.view as? UILabel
         
         var offset: CGPoint = titleScrollView.contentOffset
@@ -224,22 +221,18 @@ class NewsViewController: UIViewController {
         let offsetMax = titleScrollView.contentSize.width - screenW
         
         // 如果偏移量小于0, 就不居中, 而且如果偏移量 小于最大偏移量, 让偏移量 = 最大偏移量, 从而实现不居中
-       
         // 左边超出处理
         if offset.x < 0  {
             offset.x = 0
-            
         } else if (offset.x > offsetMax) {  //右边超出的处理
             offset.x = offsetMax
         }
         
         
         // 滚动标题,带动画
-//        titleScrollView.setContentOffset(CGPoint(x: offset.x, y: 0), animated: true)
-        
         titleScrollView.setContentOffset(offset, animated: true)
 
-        // 获取当前 label 的下标值
+        // 获取当前 label
         guard let currentLabel = tap.view as? UILabel else { return }
         
         // 如果是重复点击同一个Title,那么直接返回
@@ -253,47 +246,53 @@ class NewsViewController: UIViewController {
         oldLabel.textColor = UIColor.darkGray
         
         //MARK:- 标题字体缩放: 通过改变label的大小
-        currentLabel.transform =  CGAffineTransform(scaleX: 1.2, y: 1.2)
+        // CGAffineTransformMakeScale : 设置缩放比例. 仅通过设置缩放比例就可实现视图扑面而来和缩进频幕的效果。
+        // label缩放的同时添加动画
+        UIView.animate(withDuration: 0.3) {
+            currentLabel.transform =  CGAffineTransform(scaleX: 1.3, y: 1.3)
+        }
         
-        // 还原缩放大小
-        oldLabel.transform = CGAffineTransform.identity
-        
+        UIView.animate(withDuration: 0.3) {
+            // 还原缩放大小
+            oldLabel.transform = CGAffineTransform.identity
+        }
         // 保存最新Label的下标值
         currentIndex = currentLabel.tag
         
-        // 5.滚动条位置发生改变
+        // 改变滚动条的位置
+        // 底部滑块的 X 值: 当前下标值 * 底部滑块的宽度
         let scrollLineX = CGFloat(currentIndex) * scrollLine.frame.width
-        UIView.animate(withDuration: 0.15) {
+        //给滑块添加动画
+        UIView.animate(withDuration: 0.3) {
             self.scrollLine.frame.origin.x = scrollLineX
         }
         
     }
-    
-    
-    
-   
-    
-//    private func addChildVC() {
-//    
-//        // 添加所有子控制器
-//        var childVC = [UIViewController]()
-//        
-//        for _ in 0 ..< titleArray.count {
-//            
-//            let vc = UIViewController()
-//            
-//            vc.view.backgroundColor = UIColor(red: CGFloat(arc4random_uniform((UInt32(255.0)))), green: CGFloat(arc4random_uniform((UInt32(255.0)))), blue: CGFloat(arc4random_uniform((UInt32(255.0)))), alpha: CGFloat(arc4random_uniform((UInt32(255.0)))))
-//            
-//            childVC.append(vc)
-//        }
-//
-//    
-//    }
+
 
 
 }
 
+//: ---------------------------------
 
+// MARK:- 遵守PageTitleViewDelegate协议
+//extension NewsViewController : UIScrollViewDelegate {
+//    func pageTitleView(titleView: PageTitleView, selectedIndex index: Int) {
+//        pageContentView.setCurrentIndex(index)
+//    }
+//}
+//
 
-
-
+//
+//// MARK:- 遵守PageContentViewDelegate协议
+//extension NewsViewController : ContentViewDelegate {
+//    internal func ContentView(contentView: ContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
+//        
+//        
+//    }
+////
+////    func pageContentView(contentView: ContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
+////        titleScrollView.setTitleWithProgress(progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
+////    }
+//
+//}

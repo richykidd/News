@@ -8,17 +8,23 @@
 
 import UIKit
 
+protocol ContentViewDelegate : class {
+    func ContentView(contentView : ContentView, progress : CGFloat, sourceIndex : Int, targetIndex : Int)
+}
+
+
+private let identify = "cell"               // 创建单元格重用标识符
+
 // 内容视图
 class ContentView: UIView {
 
     // MARK:- 定义属性
-     var childVCs: [UIViewController]
-     var parentViewController: UIViewController
-    
-    
+    var childVCs: [UIViewController]
+    weak var parentViewController: UIViewController?
+
     
     //MARK:- 懒加载属性
-    // 集合视图
+    // 集合视图: UICollectionView
      lazy var collectionView : UICollectionView = {[weak self] in
         
         // 1.创建layout
@@ -27,20 +33,20 @@ class ContentView: UIView {
         
         let layout = UICollectionViewFlowLayout()
         
-         // 设置 collectionView 单元格的大小
+         // 设置单元格的大小
         layout.itemSize = (self?.bounds.size)!
         
-        // 设置 collectionView 单元格之间的最小 行 间距
+        // 设置单元格之间的最小 行 间距
         layout.minimumLineSpacing = 0
         
-        // 设置 collectionView 单元格之间的最小 列 间距
+        // 设置单元格之间的最小 列 间距
         layout.minimumInteritemSpacing = 0
         
-        // 设置 UICollectionView 布局方向为: 水平滚动
+        // 设置布局方向为: 水平滚动
         layout.scrollDirection = .horizontal
         
-        
         // 创建UICollectionView
+        // CGRect.Zero: 是一个高度和宽度为零、位于(0，0)的矩形常量
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         
         // 是否显示水平方向指示器
@@ -54,30 +60,26 @@ class ContentView: UIView {
         collectionView.scrollsToTop = false
         
         
+        // 设置 collectionView 数据源\代理为当前类
         collectionView.dataSource = self
+//        collectionView.delegate = self
         
-        // 注册 cell
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        
+        // 注册 cell. 由于内容滚动视图没用 storyboard， 因此需要注册。
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identify)
         
         return collectionView
-        
-        
-        
-        
+
     }()
     
     
     
     // MARK:- 自定义构造函数
-    
     // 参数: frame\ 对应的控制器 \ 父控制器
     init(frame: CGRect, childVCs: [UIViewController], parentViewController: UIViewController) {
         self.childVCs = childVCs
         self.parentViewController = parentViewController
      
         super.init(frame: frame)
-        
         
         // 设置 UI
         setupUI()
@@ -97,52 +99,59 @@ extension ContentView {
         
         // 将所有的子控制器添加到父控制器中
         for childV in childVCs {
-            parentViewController.addChildViewController(childV)
+            parentViewController?.addChildViewController(childV)
         }
-
         // 添加 UICollectionView, 方便 cell 中存放控制器的 View
         addSubview(collectionView)
-        
         collectionView.frame = bounds
     }
 }
 
 
-// MARK:- 遵守 UICollectionViewDataSource协议
-
+// MARK:- 遵守 UICollectionViewDataSource 协议
 extension ContentView: UICollectionViewDataSource {
     
-    // 设置 集合视图单元格的数量
+    // 设置collectionView单元格的数量
     // 每一组有多少条数据
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return childVCs.count
-        
     }
-    
     
     // 初始化\返回集合视图的单元格
     // 每一行 cell 的显示具体内容
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        // 创建单元格重用标识符
-        let identify = "cell"
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identify, for: indexPath)
         
+        // 设置cell内容
+        // cell 有循环利用, 可能会添加多次, 因此先把之前的移除, 再添加
         
-        // 给 cell设置内容
+        for view in cell.contentView.subviews {
+            view.removeFromSuperview()
+        }
+
         let childV = childVCs[indexPath.item]
         childV.view.frame = cell.contentView.bounds
         cell.contentView.addSubview(childV.view)
-
-        
+    
         return cell
 
     }
     
 }
 
+//// MARK:- 遵守 UICollectionViewDelegate 协议
+//extension ContentView: UICollectionViewDelegate {
+//    
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        
+//        
+//        
+//    }
+//    
+//}
+//
 
 
 
