@@ -14,13 +14,8 @@
 集成推送、第三方分享、第三方登录等SDK，项目代码注释清晰!
 
 
-
-<<<<<<< HEAD
-效果图: ![image](http://ww2.sinaimg.cn/large/c3a20316gw1f9qtd83ukqg20ai0j7u0x.gif)
-=======
 ### 效果图: 
 
-![image](http://ww3.sinaimg.cn/large/72f96cbajw1f88lx708xfg20aw0j4alh.gif)
->>>>>>> origin/master
+![image](http://ww2.sinaimg.cn/large/c3a20316gw1f9qtd83ukqg20ai0j7u0x.gif)
 
 
