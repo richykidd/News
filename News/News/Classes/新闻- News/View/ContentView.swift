@@ -9,25 +9,26 @@
 import UIKit
 
 protocol ContentViewDelegate : class {
-    func ContentView(contentView : ContentView, progress : CGFloat, sourceIndex : Int, targetIndex : Int)
+    func contentView(_ contentView : ContentView, progress : CGFloat, sourceIndex : Int, targetIndex : Int)
 }
-
 
 private let identify = "cell"               // 创建单元格重用标识符
 
-// 内容视图
+//MARK: - 内容视图
 class ContentView: UIView {
 
     // MARK:- 定义属性
-    var childVCs: [UIViewController]
-    weak var parentViewController: UIViewController?
-
+    fileprivate var childVCs: [UIViewController]
+    fileprivate weak var parentViewController: UIViewController?
+    fileprivate var startOffsetX : CGFloat = 0
+    fileprivate var isForbidScrollDelegate : Bool = false
+    weak var delegate : ContentViewDelegate?
     
     //MARK:- 懒加载属性
     // 集合视图: UICollectionView
      lazy var collectionView : UICollectionView = {[weak self] in
         
-        // 1.创建layout
+        // 创建layout
         // 创建 UICollectionViewFlowLayout 布局对象
         // UICollectionView 的layout 属性: 支持 Flow\ Custom 2中布局方式. 横排\纵排 -> 网格
         
@@ -59,10 +60,9 @@ class ContentView: UIView {
         collectionView.bounces = false
         collectionView.scrollsToTop = false
         
-        
         // 设置 collectionView 数据源\代理为当前类
         collectionView.dataSource = self
-//        collectionView.delegate = self
+        collectionView.delegate = self
         
         // 注册 cell. 由于内容滚动视图没用 storyboard， 因此需要注册。
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identify)
@@ -108,7 +108,7 @@ extension ContentView {
 }
 
 
-// MARK:- 遵守 UICollectionViewDataSource 协议
+// MARK:- 遵守 UICollectionViewDataSource 数据源协议
 extension ContentView: UICollectionViewDataSource {
     
     // 设置collectionView单元格的数量
@@ -126,11 +126,11 @@ extension ContentView: UICollectionViewDataSource {
         
         // 设置cell内容
         // cell 有循环利用, 可能会添加多次, 因此先把之前的移除, 再添加
-        
+        // 移除之前的
         for view in cell.contentView.subviews {
             view.removeFromSuperview()
         }
-
+        // 取出控制器
         let childV = childVCs[indexPath.item]
         childV.view.frame = cell.contentView.bounds
         cell.contentView.addSubview(childV.view)
@@ -141,25 +141,83 @@ extension ContentView: UICollectionViewDataSource {
     
 }
 
-//// MARK:- 遵守 UICollectionViewDelegate 协议
-//extension ContentView: UICollectionViewDelegate {
-//    
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        
-//        
-//        
-//    }
-//    
-//}
-//
+// MARK:- 遵守 UICollectionViewDelegate 协议
+extension ContentView: UICollectionViewDelegate {
+    
+    // 开始拖拽时,调用
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        isForbidScrollDelegate = false
+        startOffsetX = scrollView.contentOffset.x
+    }
+    // 滚动完成时,调用
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        print("--------")
+        // 判断是否是点击事件
+        if isForbidScrollDelegate { return }
+    
+        // 定义获取需要的数据
+        var progress: CGFloat = 0   // 当前滚动的进度
+        var sourceIndex: Int = 0    // 起始位置下标值
+        var targetIndex: Int = 0    // 目标位置下标值
+        
+        // 获取进度
+        let currentOffsetX = scrollView.contentOffset.x
+        let ratio = currentOffsetX / scrollView.bounds.width
+        progress = ratio - floor(ratio)
+        
+        let scrollViewW = scrollView.bounds.width
+        
+        // 判断滑动的方向. 左滑/右滑
+        if currentOffsetX > startOffsetX { // 向左滑动
+            // 1.计算progress
+            progress = currentOffsetX / scrollViewW - floor(currentOffsetX / scrollViewW)
+            
+            // 2.计算sourceIndex
+            sourceIndex = Int(currentOffsetX / scrollViewW)
+            
+            // 3.计算targetIndex
+            targetIndex = sourceIndex + 1
+            if targetIndex >= childVCs.count {
+                targetIndex = childVCs.count - 1
+            }
+            
+            // 4.如果完全划过去
+            if currentOffsetX - startOffsetX == scrollViewW {
+                progress = 1
+                targetIndex = sourceIndex
+            }
+        } else { // 右滑
+            // 1.计算progress
+            progress = 1 - (currentOffsetX / scrollViewW - floor(currentOffsetX / scrollViewW))
+            
+            // 2.计算targetIndex
+            targetIndex = Int(currentOffsetX / scrollViewW)
+            
+            // 3.计算sourceIndex
+            sourceIndex = targetIndex + 1
+            if sourceIndex >= childVCs.count {
+                sourceIndex = childVCs.count - 1
+            }
+            
+        }
+        
+        // 3.通知代理. 将progress/sourceIndex/targetIndex传递给titleView
+        delegate?.contentView(self, progress: progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
+        
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
+// MARK:- 对外暴露的方法
+extension ContentView {
+     func setCurrentIndex(_ currentIndex : Int) {
+        
+        // 1.记录需要进制执行代理方法
+        isForbidScrollDelegate = true
+        
+        // 2.滚动正确的位置
+        let offsetX = CGFloat(currentIndex) * collectionView.frame.width
+        collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
+    }
+}
