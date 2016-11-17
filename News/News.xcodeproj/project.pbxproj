@@ -11,6 +11,8 @@
 		6B3CB2641DD61D1700DBE0A6 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3CB2631DD61D1700DBE0A6 /* NewsModel.swift */; };
 		6B3CB2671DD61DAE00DBE0A6 /* NewViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3CB2651DD61DAE00DBE0A6 /* NewViewCell.swift */; };
 		6B3CB2681DD61DAE00DBE0A6 /* NewViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B3CB2661DD61DAE00DBE0A6 /* NewViewCell.xib */; };
+		6B4100221DDDE92500B1B7DC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4100211DDDE92500B1B7DC /* BaseViewController.swift */; };
+		6B4100251DDDE94600B1B7DC /* Apple_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4100241DDDE94600B1B7DC /* Apple_ViewController.swift */; };
 		6B4E97361DD61FE40047E6D1 /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4E97351DD61FE40047E6D1 /* NetworkTool.swift */; };
 		6B4E97381DD62BCD0047E6D1 /* LaunchScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B4E97371DD62BCD0047E6D1 /* LaunchScreen.jpg */; };
 		6B5EC6751DD5E40800286D8E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5EC6741DD5E40800286D8E /* TitleView.swift */; };
@@ -42,6 +44,8 @@
 		6B3CB2631DD61D1700DBE0A6 /* NewsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		6B3CB2651DD61DAE00DBE0A6 /* NewViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewCell.swift; sourceTree = "<group>"; };
 		6B3CB2661DD61DAE00DBE0A6 /* NewViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewViewCell.xib; sourceTree = "<group>"; };
+		6B4100211DDDE92500B1B7DC /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		6B4100241DDDE94600B1B7DC /* Apple_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apple_ViewController.swift; sourceTree = "<group>"; };
 		6B4E97351DD61FE40047E6D1 /* NetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
 		6B4E97371DD62BCD0047E6D1 /* LaunchScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LaunchScreen.jpg; sourceTree = "<group>"; };
 		6B5EC6741DD5E40800286D8E /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
@@ -82,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B4100231DDDE94600B1B7DC /* 苹果- Apple */ = {
+			isa = PBXGroup;
+			children = (
+				6B4100241DDDE94600B1B7DC /* Apple_ViewController.swift */,
+			);
+			path = "苹果- Apple";
+			sourceTree = "<group>";
+		};
 		6B818B341D5CE0950038C5C3 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				6BBD2C671D96E83600F9EB23 /* 头条- Headline */,
+				6B4100231DDDE94600B1B7DC /* 苹果- Apple */,
 				6BBD2C691D96E83600F9EB23 /* 娱乐- Happy */,
 			);
 			name = ChildViewController;
@@ -329,6 +342,7 @@
 			children = (
 				6BBD2CC01D96FAB100F9EB23 /* Main.storyboard */,
 				6BBD2CC11D96FAB100F9EB23 /* TabBarController.swift */,
+				6B4100211DDDE92500B1B7DC /* BaseViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -499,9 +513,11 @@
 				6B4E97361DD61FE40047E6D1 /* NetworkTool.swift in Sources */,
 				6B28C9A81D98404400307EDD /* ContentView.swift in Sources */,
 				6BBD2C6B1D96E83600F9EB23 /* HeadlineViewController.swift in Sources */,
+				6B4100221DDDE92500B1B7DC /* BaseViewController.swift in Sources */,
 				6BBD2CBB1D96FA0B00F9EB23 /* VideoViewController.swift in Sources */,
 				6BBD2CC31D96FAB100F9EB23 /* TabBarController.swift in Sources */,
 				6BBD2CBD1D96FA0B00F9EB23 /* ReadViewController.swift in Sources */,
+				6B4100251DDDE94600B1B7DC /* Apple_ViewController.swift in Sources */,
 				6BBD2C6C1D96E83600F9EB23 /* HappyViewController.swift in Sources */,
 				6BBD2CC51D97048B00F9EB23 /* NewsViewController.swift in Sources */,
 				6B818B411D5CE0950038C5C3 /* AppDelegate.swift in Sources */,

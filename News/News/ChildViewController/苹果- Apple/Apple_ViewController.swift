@@ -1,26 +1,21 @@
 //
-//  HeadlineViewController.swift
+//  Apple_ViewController.swift
 //  News
 //
-//  Created by Liu Chuan on 16/8/4.
+//  Created by Liu Chuan on 2016/11/16.
 //  Copyright © 2016年 LC. All rights reserved.
 //
 
 import UIKit
-
-
 // MARK:- 定义全局常量
 private let identify = "cell"
 
-
-class HeadlineViewController: BaseViewController {
+class Apple_ViewController: BaseViewController {
     
     
     // MARK: 懒加载属性
     fileprivate lazy var newsModels: [NewsModel] = [NewsModel]()
-    fileprivate var refreshControl = UIRefreshControl()    //刷新控件
     
-  
     // MARK: 懒加载控件 tableView
     fileprivate lazy var tableView: UITableView = {[unowned self] in
         
@@ -34,67 +29,40 @@ class HeadlineViewController: BaseViewController {
         
         // 注册 cell
         //tableView.register(UITableViewCell.self, forCellReuseIdentifier: identify)
-        tableView.register(UINib(nibName: "NewViewCell", bundle: nil), forCellReuseIdentifier: identify)
+        tableView.register(UINib(nibName: "AppleViewCell", bundle: nil), forCellReuseIdentifier: identify)
         
         return tableView
         
         
         }()
 
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // 添加 UItableView
         view.addSubview(tableView)
         
-        
         // 请求数据
         loadData()
-        
-    
-        refreshControl = UIRefreshControl()
-        
-        tableView.addSubview(refreshControl)
-        
 
-
-        
     }
 
- 
 }
-
-//// MARK:- 设置刷新控件
-//fileprivate func  steUPRefreshControl() {
-//    
-//    refreshControl = UIRefreshControl()
-//    
-//    tableView.addSubview(refreshControl)
-//    
-//    
-//    
-//}
-
-
-
 
 
 // MARK:- 网络数据的请求
-extension HeadlineViewController {
+extension Apple_ViewController {
     fileprivate func loadData() {
-        NetworkTool.requsetData(URLString: "http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html", type: .get)
+        NetworkTool.requsetData("http://c.m.163.com/nc/article/list/T1348649580692/0-20.html", type: .get)
         { (result: Any) in
             
-            //print(result)
+            print(result)
             
             // 将 Any 类型转换成字典类型
             guard let resultDictionary = result as? [String : Any] else { return }
             
             // 根据 T1348649079062 的key 取出内容
-            guard let dataArray = resultDictionary["T1348647853363"] as? [[String : Any]] else { return }
+            guard let dataArray = resultDictionary["T1348649580692"] as? [[String : Any]] else { return }
             
             // 遍历字典, 将字典转换成模型对象
             for dict in dataArray {
@@ -110,8 +78,9 @@ extension HeadlineViewController {
     
 }
 
+
 // MARK:- 实现 UITableView 数据源协议
-extension HeadlineViewController: UITableViewDataSource {
+extension Apple_ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsModels.count
@@ -120,7 +89,7 @@ extension HeadlineViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // 获取 cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: identify, for: indexPath) as! NewViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identify, for: indexPath) as! AppleViewCell
         
         // 设置 cell 数据
         //cell.textLabel?.text = newsModels[indexPath.row].title
@@ -133,3 +102,4 @@ extension HeadlineViewController: UITableViewDataSource {
     }
     
 }
+
