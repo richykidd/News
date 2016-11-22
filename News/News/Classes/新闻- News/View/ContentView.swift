@@ -37,10 +37,10 @@ class ContentView: UIView {
          // 设置单元格的大小
         layout.itemSize = (self?.bounds.size)!
         
-        // 设置单元格之间的最小 行 间距
+        // 设置单元格之间的最小 行间距
         layout.minimumLineSpacing = 0
         
-        // 设置单元格之间的最小 列 间距
+        // 设置单元格之间的最小 列间距
         layout.minimumInteritemSpacing = 0
         
         // 设置布局方向为: 水平滚动
@@ -49,6 +49,8 @@ class ContentView: UIView {
         // 创建UICollectionView
         // CGRect.Zero: 是一个高度和宽度为零、位于(0，0)的矩形常量
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        
+        collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
         // 是否显示水平方向指示器
         collectionView.showsVerticalScrollIndicator = false
@@ -78,7 +80,7 @@ class ContentView: UIView {
     init(frame: CGRect, childVCs: [UIViewController], parentViewController: UIViewController) {
         self.childVCs = childVCs
         self.parentViewController = parentViewController
-     
+
         super.init(frame: frame)
         
         // 设置 UI
@@ -153,7 +155,7 @@ extension ContentView: UICollectionViewDelegate {
     // 滚动完成时,调用
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        print("--------")
+        //print("--------")
         // 判断是否是点击事件
         if isForbidScrollDelegate { return }
     
@@ -209,7 +211,7 @@ extension ContentView: UICollectionViewDelegate {
     }
 }
 
-// MARK:- 对外暴露的方法
+// MARK: - 对外暴露的方法
 extension ContentView {
      func setCurrentIndex(_ currentIndex : Int) {
         

@@ -9,11 +9,8 @@
 import UIKit
 
 // MARK:- 定义全局常量
-private let titleViewH: CGFloat = 44         // 标题滚动视图的高度
+//private let titleViewH: CGFloat = 44         // 标题滚动视图的高度
 private let colorLan = UIColor(hue:0.56, saturation:0.76, brightness:1.00, alpha:1.00)  //全局颜色: 蓝色
-
-
-
 
 class NewsViewController: UIViewController {
     
@@ -26,10 +23,31 @@ class NewsViewController: UIViewController {
        
         // 标题滚动视图Y值: 状态栏高度 + 导航栏高度
         let titleFrame = CGRect(x: 0, y: statusH + navigationH, width: screenW, height: titleViewH)
-        let titlesArray = ["头条", "精选", "娱乐", "手机","体育", "视频", "财经", "汽车","军事", "时尚", "健康", "彩票", "搞笑"]
+        let titlesArray = ["头条", "数码", "娱乐", "手机","体育", "视频", "财经", "汽车","军事", "时尚", "健康", "彩票", "搞笑"]
         
+        // 频道列表没从网上获取，直接用了网易新闻bundle里的这个文件。
+//        let url: NSURL = Bundle.main.url(forResource: "topic_news.json", withExtension: nil)! as NSURL
+//        print(url)
+//        
+//        let data = NSData(contentsOf: url as URL)
+//        
+//        do {
+//            
+//            let dict: [NSObject : AnyObject] = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions(rawValue: 0))
+//            
+//        } catch {
+//            let array: [AnyObject] = dict["tList"]
+//            let arrayM: NSMutableArray = NSMutableArray.withCapacity(array.count)
+//            
+//        }
+        
+        //1 获取json文件路径
+        //let path = Bundle.main.path(forResource: "data", ofType: "json")
+
         let title_View = TitleView(frame: titleFrame, titles: titlesArray)
+        
         title_View.delegate = self
+        
         return title_View
     }()
     
@@ -39,15 +57,16 @@ class NewsViewController: UIViewController {
     fileprivate lazy var contentView : ContentView = {[weak self] in
         
         // 1.确定内容的frame
-        // contentH = 屏幕高度 - 状态栏高度 - 导航栏高度 - 标题滚动视图高度 - 底部线条的高度
-        let contentH = screenH - statusH - navigationH - titleViewH - ScrollLineH
+        // contentH = 屏幕高度 - 状态栏高度 - 导航栏高度 - 标题滚动视图高度 - 底部线条的高度 - 标签栏的高度
+        let contentH = screenH - statusH - navigationH - titleViewH - ScrollLineH - tabBarH
         let contentFrame = CGRect(x: 0, y: statusH + navigationH + titleViewH, width: screenW, height: contentH)
         
         // 2.确定所有的子控制器
         var childVcs = [UIViewController]()
         childVcs.append(HeadlineViewController())
+        childVcs.append(Apple_ViewController())
         
-        for _ in 0 ..< 12 {
+        for _ in 0 ..< 11 {
             let vc = UIViewController()
             vc.view.backgroundColor = UIColor(red: CGFloat(arc4random_uniform(255)), green: CGFloat(arc4random_uniform(255)), blue: CGFloat(arc4random_uniform(255)))
             

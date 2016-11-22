@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class NewsModel: NSObject {
     
     // MARK: 定义属性
@@ -16,15 +17,19 @@ class NewsModel: NSObject {
     var imgsrc: String = ""     // 图片
     var source: String = ""     // 来源
     var tname: String = ""      // 分类
+    var description1: String = ""//内容详情
     
+    var commentcount: Int = 94  // IT 之家跟帖数
     
-    
+
     // MARK: 定义字典转模型的构造函数
     init(dict : [String : Any]) {
         super.init()
         
+        
         setValuesForKeys(dict)
     }
+    
 
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }

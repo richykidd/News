@@ -8,17 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		6B28C9A81D98404400307EDD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B28C9A71D98404400307EDD /* ContentView.swift */; };
+		6B376D001DDCB0F000E82D3F /* AppleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B376CFE1DDCB0F000E82D3F /* AppleViewCell.swift */; };
+		6B376D011DDCB0F000E82D3F /* AppleViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B376CFF1DDCB0F000E82D3F /* AppleViewCell.xib */; };
 		6B3CB2641DD61D1700DBE0A6 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3CB2631DD61D1700DBE0A6 /* NewsModel.swift */; };
 		6B3CB2671DD61DAE00DBE0A6 /* NewViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3CB2651DD61DAE00DBE0A6 /* NewViewCell.swift */; };
 		6B3CB2681DD61DAE00DBE0A6 /* NewViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B3CB2661DD61DAE00DBE0A6 /* NewViewCell.xib */; };
-		6B4100221DDDE92500B1B7DC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4100211DDDE92500B1B7DC /* BaseViewController.swift */; };
-		6B4100251DDDE94600B1B7DC /* Apple_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4100241DDDE94600B1B7DC /* Apple_ViewController.swift */; };
+		6B4100201DDDE88400B1B7DC /* Apple_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B41001F1DDDE88400B1B7DC /* Apple_ViewController.swift */; };
 		6B4E97361DD61FE40047E6D1 /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4E97351DD61FE40047E6D1 /* NetworkTool.swift */; };
 		6B4E97381DD62BCD0047E6D1 /* LaunchScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B4E97371DD62BCD0047E6D1 /* LaunchScreen.jpg */; };
 		6B5EC6751DD5E40800286D8E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5EC6741DD5E40800286D8E /* TitleView.swift */; };
 		6B818B411D5CE0950038C5C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B818B401D5CE0950038C5C3 /* AppDelegate.swift */; };
 		6B818B481D5CE0950038C5C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B818B471D5CE0950038C5C3 /* Assets.xcassets */; };
 		6B818B4B1D5CE0950038C5C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B818B491D5CE0950038C5C3 /* LaunchScreen.storyboard */; };
+		6B917BBF1DDD8DB200423D25 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B917BBE1DDD8DB200423D25 /* BaseViewController.swift */; };
 		6BBD2C6B1D96E83600F9EB23 /* HeadlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD2C681D96E83600F9EB23 /* HeadlineViewController.swift */; };
 		6BBD2C6C1D96E83600F9EB23 /* HappyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD2C6A1D96E83600F9EB23 /* HappyViewController.swift */; };
 		6BBD2CB41D96FA0B00F9EB23 /* Photo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BBD2C981D96FA0B00F9EB23 /* Photo.storyboard */; };
@@ -33,6 +35,8 @@
 		6BBD2CC21D96FAB100F9EB23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BBD2CC01D96FAB100F9EB23 /* Main.storyboard */; };
 		6BBD2CC31D96FAB100F9EB23 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD2CC11D96FAB100F9EB23 /* TabBarController.swift */; };
 		6BBD2CC51D97048B00F9EB23 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBD2CC41D97048B00F9EB23 /* NewsViewController.swift */; };
+		6BC27EAD1DDF02C700886746 /* RefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC27EAC1DDF02C700886746 /* RefreshView.swift */; };
+		6BC27EAF1DDF3F4300886746 /* topic_news.json in Resources */ = {isa = PBXBuildFile; fileRef = 6BC27EAE1DDF3F4300886746 /* topic_news.json */; };
 		6BC33DA81D98172C0083082D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC33DA71D98172C0083082D /* UIColor+Extension.swift */; };
 		6BC33DAA1D981DC80083082D /* NewsView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC33DA91D981DC80083082D /* NewsView+Extension.swift */; };
 		8442BB983CF2BD05020A6AD3 /* Pods_News.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB76749655A1F5572F987EF3 /* Pods_News.framework */; };
@@ -41,11 +45,12 @@
 /* Begin PBXFileReference section */
 		62F06398E350C6F56F235790 /* Pods-News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.debug.xcconfig"; path = "Pods/Target Support Files/Pods-News/Pods-News.debug.xcconfig"; sourceTree = "<group>"; };
 		6B28C9A71D98404400307EDD /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6B376CFE1DDCB0F000E82D3F /* AppleViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleViewCell.swift; sourceTree = "<group>"; };
+		6B376CFF1DDCB0F000E82D3F /* AppleViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppleViewCell.xib; sourceTree = "<group>"; };
 		6B3CB2631DD61D1700DBE0A6 /* NewsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		6B3CB2651DD61DAE00DBE0A6 /* NewViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewCell.swift; sourceTree = "<group>"; };
 		6B3CB2661DD61DAE00DBE0A6 /* NewViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewViewCell.xib; sourceTree = "<group>"; };
-		6B4100211DDDE92500B1B7DC /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		6B4100241DDDE94600B1B7DC /* Apple_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apple_ViewController.swift; sourceTree = "<group>"; };
+		6B41001F1DDDE88400B1B7DC /* Apple_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Apple_ViewController.swift; path = "News/ChildViewController/苹果- Apple/Apple_ViewController.swift"; sourceTree = SOURCE_ROOT; };
 		6B4E97351DD61FE40047E6D1 /* NetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
 		6B4E97371DD62BCD0047E6D1 /* LaunchScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LaunchScreen.jpg; sourceTree = "<group>"; };
 		6B5EC6741DD5E40800286D8E /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
@@ -54,6 +59,7 @@
 		6B818B471D5CE0950038C5C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B818B4A1D5CE0950038C5C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B818B4C1D5CE0950038C5C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B917BBE1DDD8DB200423D25 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6BBD2C681D96E83600F9EB23 /* HeadlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadlineViewController.swift; sourceTree = "<group>"; };
 		6BBD2C6A1D96E83600F9EB23 /* HappyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappyViewController.swift; sourceTree = "<group>"; };
 		6BBD2C981D96FA0B00F9EB23 /* Photo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Photo.storyboard; sourceTree = "<group>"; };
@@ -68,6 +74,8 @@
 		6BBD2CC01D96FAB100F9EB23 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6BBD2CC11D96FAB100F9EB23 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		6BBD2CC41D97048B00F9EB23 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		6BC27EAC1DDF02C700886746 /* RefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshView.swift; sourceTree = "<group>"; };
+		6BC27EAE1DDF3F4300886746 /* topic_news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topic_news.json; sourceTree = "<group>"; };
 		6BC33DA71D98172C0083082D /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		6BC33DA91D981DC80083082D /* NewsView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NewsView+Extension.swift"; sourceTree = "<group>"; };
 		FB76749655A1F5572F987EF3 /* Pods_News.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_News.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,14 +94,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6B4100231DDDE94600B1B7DC /* 苹果- Apple */ = {
-			isa = PBXGroup;
-			children = (
-				6B4100241DDDE94600B1B7DC /* Apple_ViewController.swift */,
-			);
-			path = "苹果- Apple";
-			sourceTree = "<group>";
-		};
 		6B818B341D5CE0950038C5C3 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +119,7 @@
 				6BC33DA61D980FA40083082D /* Tools */,
 				6B818B401D5CE0950038C5C3 /* AppDelegate.swift */,
 				6B4E97371DD62BCD0047E6D1 /* LaunchScreen.jpg */,
+				6BC27EAE1DDF3F4300886746 /* topic_news.json */,
 				6B818B471D5CE0950038C5C3 /* Assets.xcassets */,
 				6B818B491D5CE0950038C5C3 /* LaunchScreen.storyboard */,
 				6B818B4C1D5CE0950038C5C3 /* Info.plist */,
@@ -126,11 +127,20 @@
 			path = News;
 			sourceTree = "<group>";
 		};
+		6BB7AC341DDCBD4C0017A285 /* 苹果- Apple */ = {
+			isa = PBXGroup;
+			children = (
+				6B41001F1DDDE88400B1B7DC /* Apple_ViewController.swift */,
+			);
+			name = "苹果- Apple";
+			path = "头条- Headline/苹果- Apple";
+			sourceTree = "<group>";
+		};
 		6BBD2C661D96E83600F9EB23 /* ChildViewController */ = {
 			isa = PBXGroup;
 			children = (
 				6BBD2C671D96E83600F9EB23 /* 头条- Headline */,
-				6B4100231DDDE94600B1B7DC /* 苹果- Apple */,
+				6BB7AC341DDCBD4C0017A285 /* 苹果- Apple */,
 				6BBD2C691D96E83600F9EB23 /* 娱乐- Happy */,
 			);
 			name = ChildViewController;
@@ -264,9 +274,11 @@
 			isa = PBXGroup;
 			children = (
 				6B28C9A71D98404400307EDD /* ContentView.swift */,
+				6B5EC6741DD5E40800286D8E /* TitleView.swift */,
 				6B3CB2651DD61DAE00DBE0A6 /* NewViewCell.swift */,
 				6B3CB2661DD61DAE00DBE0A6 /* NewViewCell.xib */,
-				6B5EC6741DD5E40800286D8E /* TitleView.swift */,
+				6B376CFE1DDCB0F000E82D3F /* AppleViewCell.swift */,
+				6B376CFF1DDCB0F000E82D3F /* AppleViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -342,7 +354,8 @@
 			children = (
 				6BBD2CC01D96FAB100F9EB23 /* Main.storyboard */,
 				6BBD2CC11D96FAB100F9EB23 /* TabBarController.swift */,
-				6B4100211DDDE92500B1B7DC /* BaseViewController.swift */,
+				6B917BBE1DDD8DB200423D25 /* BaseViewController.swift */,
+				6BC27EAC1DDF02C700886746 /* RefreshView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -444,8 +457,10 @@
 				6B3CB2681DD61DAE00DBE0A6 /* NewViewCell.xib in Resources */,
 				6BBD2CB41D96FA0B00F9EB23 /* Photo.storyboard in Resources */,
 				6BBD2CB61D96FA0B00F9EB23 /* Me.storyboard in Resources */,
+				6BC27EAF1DDF3F4300886746 /* topic_news.json in Resources */,
 				6B4E97381DD62BCD0047E6D1 /* LaunchScreen.jpg in Resources */,
 				6BBD2CBA1D96FA0B00F9EB23 /* Video.storyboard in Resources */,
+				6B376D011DDCB0F000E82D3F /* AppleViewCell.xib in Resources */,
 				6BBD2CC21D96FAB100F9EB23 /* Main.storyboard in Resources */,
 				6B818B481D5CE0950038C5C3 /* Assets.xcassets in Resources */,
 			);
@@ -507,17 +522,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B3CB2641DD61D1700DBE0A6 /* NewsModel.swift in Sources */,
+				6B376D001DDCB0F000E82D3F /* AppleViewCell.swift in Sources */,
 				6B3CB2671DD61DAE00DBE0A6 /* NewViewCell.swift in Sources */,
 				6BBD2CB71D96FA0B00F9EB23 /* MeViewController.swift in Sources */,
+				6B4100201DDDE88400B1B7DC /* Apple_ViewController.swift in Sources */,
+				6B917BBF1DDD8DB200423D25 /* BaseViewController.swift in Sources */,
+				6BC27EAD1DDF02C700886746 /* RefreshView.swift in Sources */,
 				6BC33DAA1D981DC80083082D /* NewsView+Extension.swift in Sources */,
 				6B4E97361DD61FE40047E6D1 /* NetworkTool.swift in Sources */,
 				6B28C9A81D98404400307EDD /* ContentView.swift in Sources */,
 				6BBD2C6B1D96E83600F9EB23 /* HeadlineViewController.swift in Sources */,
-				6B4100221DDDE92500B1B7DC /* BaseViewController.swift in Sources */,
 				6BBD2CBB1D96FA0B00F9EB23 /* VideoViewController.swift in Sources */,
 				6BBD2CC31D96FAB100F9EB23 /* TabBarController.swift in Sources */,
 				6BBD2CBD1D96FA0B00F9EB23 /* ReadViewController.swift in Sources */,
-				6B4100251DDDE94600B1B7DC /* Apple_ViewController.swift in Sources */,
 				6BBD2C6C1D96E83600F9EB23 /* HappyViewController.swift in Sources */,
 				6BBD2CC51D97048B00F9EB23 /* NewsViewController.swift in Sources */,
 				6B818B411D5CE0950038C5C3 /* AppDelegate.swift in Sources */,

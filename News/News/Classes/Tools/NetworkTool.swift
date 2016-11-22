@@ -21,12 +21,13 @@ enum MethodType {
 class NetworkTool {
 
     
-    class func requsetData(URLString: String, type: MethodType, parameters: [String: Any]? = nil, finishedCallback: @escaping (_ result: Any) -> ()) {
+    class func requsetData(_ URLString: String, type: MethodType, parameters: [String: Any]? = nil, finishedCallback: @escaping (_ result: Any) -> ()) {
 
         
         let method = type == .get ? HTTPMethod.get : HTTPMethod.post
         
         Alamofire.request(URLString, method: method, parameters: parameters).responseJSON { (response) in
+            
             
 //            // 效验是否有结果
 //            if let result = response.result.value {
@@ -51,7 +52,6 @@ class NetworkTool {
     }
     
 }
-        
-    
+  
  
 

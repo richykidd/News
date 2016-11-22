@@ -10,7 +10,13 @@ import UIKit
 // MARK:- 定义全局常量
 private let identify = "cell"
 
+private let RefreshHeight: CGFloat = 200
+
 class Apple_ViewController: BaseViewController {
+    
+    
+    // MARK: - 刷新视图
+    fileprivate var refreshView: RefreshView!
     
     
     // MARK: 懒加载属性
@@ -23,7 +29,8 @@ class Apple_ViewController: BaseViewController {
         let tableView = UITableView()
         
         // 设置 UItableView 相关属性
-        tableView.frame = self.view.bounds
+        //tableView.frame = self.view.bounds
+         tableView.frame = CGRect(x: 0, y: 0, width: Int(self.view.bounds.width), height: Int(screenH - statusH - navigationH - titleViewH - ScrollLineH - tabBarH))
         tableView.dataSource = self
         tableView.rowHeight = 90
         
@@ -39,15 +46,39 @@ class Apple_ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // 设置刷新视图
+//        setupRefreshView()
+        refreshView = RefreshView(frame: CGRect(x: 0, y: -RefreshHeight, width: view.bounds.width, height: RefreshHeight), scrollView: tableView)
+        refreshView.backgroundColor = UIColor.red
+        
+      //  view.insertSubview(refreshView, at: 0)
+        view.addSubview(refreshView)
+
+        
         // 添加 UItableView
         view.addSubview(tableView)
         
         // 请求数据
         loadData()
-
+        
     }
 
+    // MARK: - 设置刷新视图
+    fileprivate func setupRefreshView() {
+//        refreshView = RefreshView(frame: CGRect(x: 0, y: -RefreshHeight, width: view.bounds.width, height: RefreshHeight ), scrollView: tableView)
+        
+        refreshView = RefreshView(frame: CGRect(x: 0, y: -RefreshHeight, width: view.bounds.width, height: RefreshHeight), scrollView: tableView)
+        
+        refreshView.backgroundColor = UIColor.red
+        
+        view.insertSubview(refreshView, at: 0)
+    }
+    
+    
+    
 }
+
+
 
 
 // MARK:- 网络数据的请求

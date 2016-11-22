@@ -13,8 +13,6 @@ protocol TitleViewDelegate : class {
     func titleView(_ titleView : TitleView, selectedIndex index : Int)
 }
 
-
-
 // MARK:- 定义全局常量
 fileprivate let colorLan = UIColor(hue:0.56, saturation:0.76, brightness:1.00, alpha:1.00)  // 全局颜色: 蓝色
 private let NormalColor : (CGFloat, CGFloat, CGFloat) = (85, 85, 85)                        // 默认状态下的颜色
@@ -178,10 +176,6 @@ extension TitleView {
         // 设置 (标题\内容) 滚动视图的滚动范围
         scrollView.contentSize = CGSize(width: titles.count * Int(labelWidth), height: 0)
         
-        // contentScrollView.contentSize = CGSize(width: titleArray.count * Int(screenW), height: 0)
-        
-        
-        
     }
 
 }
@@ -190,8 +184,6 @@ extension TitleView {
 extension TitleView {
     
     @objc fileprivate func labelClick(_ tap: UITapGestureRecognizer) {
-        
-    
         
         print(tap.view!)
         
@@ -215,7 +207,6 @@ extension TitleView {
         } else if (offset.x > offsetMax) {  //右边超出的处理
             offset.x = offsetMax
         }
-        
         
         // 滚动标题,带动画
         scrollView.setContentOffset(offset, animated: true)
@@ -264,6 +255,7 @@ extension TitleView {
 // MARK:- 对外暴露的方法
 extension TitleView : UIScrollViewDelegate{
     func setTitleWithProgress(_ progress : CGFloat, sourceIndex : Int, targetIndex : Int) {
+        
         // 1.取出sourceLabel/targetLabel
         let sourceLabel = titleLabels[sourceIndex]
         let targetLabel = titleLabels[targetIndex]
@@ -286,35 +278,23 @@ extension TitleView : UIScrollViewDelegate{
         // 4.记录最新的index
         currentIndex = targetIndex
         
-        
-        //: ------------------
-        
-        func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        
+        // MARK: - 缩放标题
         // label缩放的同时添加动画
         UIView.animate(withDuration: 0.3) {
-            targetLabel.transform =  CGAffineTransform(scaleX: 1.2, y: 1.2)
+            sourceLabel.transform =  CGAffineTransform(scaleX: 1.0, y: 1.0)
+
+        }
+        UIView.animate(withDuration: 0.3) {
+        // 还原缩放大小
+            targetLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             
         }
-        
-        UIView.animate(withDuration: 0.3) {
-            // 还原缩放大小
-            sourceLabel.transform = CGAffineTransform.identity
-        }
-    }
-        
-//        // 2.滚动正确的位置
-//        let offsetX = CGFloat(targetIndex) * (TitleView.frame.width)
-//        
-//        TitleView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
-//
-        
+    
         // MARK: - 标题居中
         // 本质: 修改 标题滚动视图 的偏移量
         // 偏移量 = label 的中心 X 减去屏幕宽度的一半
-        
         // 获取之前的 label
-//        let old_Label = titleLabels[currentIndex]
+       // let old_Label = titleLabels[currentIndex]
         
         var offset: CGPoint = scrollView.contentOffset
         offset.x = targetLabel.center.x - screenW * 0.5
@@ -329,7 +309,6 @@ extension TitleView : UIScrollViewDelegate{
         } else if (offset.x > offsetMax) {  //右边超出的处理
             offset.x = offsetMax
         }
-        
         
         // 滚动标题,带动画
         scrollView.setContentOffset(offset, animated: true)

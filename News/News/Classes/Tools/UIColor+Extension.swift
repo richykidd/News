@@ -8,10 +8,7 @@
 
 import UIKit
 
-
-
-// MARK:- UIcolor 扩展
-
+// MARK: - UIcolor 扩展
 extension UIColor {
     
     convenience init(red: CGFloat, green: CGFloat, blue: CGFloat) {
