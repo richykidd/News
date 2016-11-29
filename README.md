@@ -6,6 +6,7 @@
 [![Swift compatible](https://img.shields.io/badge/swift-compatible-4BC51D.svg?style=flat)](https://developer.apple.com/swift/)
 [![Swift &3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 ![](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)
+![](https://img.shields.io/amo/stars/dustman.svg)
 ![](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 ![](https://img.shields.io/github/watchers/badges/shields.svg?style=social&label=Watch)
 
